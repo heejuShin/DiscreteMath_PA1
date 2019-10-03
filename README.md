@@ -16,19 +16,19 @@
 
 ### 1. HOW to EXECUTE
 
- - Enter ```make``` or ```make puzzles``` to execute codes.
+ - Enter ```$ make``` or ```$ make puzzles``` to execute codes.
 
- - Enter ```make erase``` to clean all execute files. You must do this before doing new make command.
+ - Enter ```$ make erase``` to clean all execute files. You must do this before doing new make command.
 
  - If you want to run each file, enter the desired file name as shown below.
 
-    ```make Sudoku```
+    ```$ make Sudoku```
 
-    ```make FillaPix```
+    ```$ make FillaPix```
 
-    ```make Numbrix```
+    ```$ make Numbrix```
 
-- If you only want to create an executable file and don't want to run it, enter ```make puzzle```
+- If you only want to create an executable file and don't want to run it, enter ```$ make puzzle```
 
 
 <hr>
