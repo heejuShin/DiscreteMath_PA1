@@ -43,7 +43,7 @@
     ```
         make FillaPix
 
-        gcc FillaPix.c -o FillzPix
+        gcc FillaPix.c -o Filla Pix
 
         ./FillaPix
 
