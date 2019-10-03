@@ -16,7 +16,7 @@
 
 ### 1. HOW to EXECUTE
 
- - Enter ```make``` or ```make puzzles``` to execute code.
+ - Enter ```make``` or ```make puzzles``` to execute codes.
 
  - Enter ```make erase``` to clean all execute files. You must do this before doing new make command.
 
@@ -41,13 +41,13 @@
 - Example
 
     ```
-        make Fill a Pix
+        make FillaPix
 
         gcc FillaPix.c -o FillzPix
 
         ./FillaPix
 
-        input //Enter here
+        input          #<-Enter here
 
     ```
 
