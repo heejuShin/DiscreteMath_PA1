@@ -59,6 +59,6 @@
 
   #### Fill-a-Pix
 
-  - multiple solution은 최대 5개까지 출력된다.
+  - multiple solution are printed up to 5.
 
   #### Numbrix
