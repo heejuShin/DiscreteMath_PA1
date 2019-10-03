@@ -2,7 +2,7 @@
 
 ## ITP 20002-01
 
-Group 3
+##Group 3
 
 > 21300   이기현
 
@@ -12,4 +12,33 @@ Group 3
 
 > 21800760 최하현
 
-###
+### 1. HOW to EXECUTE
+
+ - Enter ```make``` or ```make puzzles``` to execute code.
+
+ - Enter ```make erase``` to clean all execute files. You must do this before doing new make command.
+
+ - If you want to run each file, enter the desired file name as shown below.
+
+```make Sudoku```
+
+```make FillaPix```
+
+```make Numbrix```
+
+- If you only want to create an executable file and don't want to run it, enter ```make puzzle```
+
+
+### 2. What to Enter
+
+- After the file is run, enter the file name to be used as input.
+
+- Example
+
+```make Fill a Pix
+
+    gcc FillaPix.c -o FillzPix
+
+    ./FillaPix
+
+    input.txt```
