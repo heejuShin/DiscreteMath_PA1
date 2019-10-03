@@ -2,7 +2,7 @@
 
 ## ITP 20002-01
 
-##Group 3
+## Group 3
 
 > 21300   이기현
 
@@ -20,13 +20,16 @@
 
  - If you want to run each file, enter the desired file name as shown below.
 
-```make Sudoku```
+    ```make Sudoku```
 
-```make FillaPix```
+    ```make FillaPix```
 
-```make Numbrix```
+    ```make Numbrix```
 
 - If you only want to create an executable file and don't want to run it, enter ```make puzzle```
+
+
+<hr>
 
 
 ### 2. What to Enter
@@ -35,10 +38,27 @@
 
 - Example
 
-```make Fill a Pix
+    ```
+        make Fill a Pix
 
-    gcc FillaPix.c -o FillzPix
+        gcc FillaPix.c -o FillzPix
 
-    ./FillaPix
+        ./FillaPix
 
-    input.txt```
+        input //Enter here
+
+    ```
+
+
+<hr>
+
+
+## 3. Puzzle-specific instructions
+
+  #### Sudoku
+
+  #### Fill-a-Pix
+
+  - multiple solution은 최대 5개까지 출력된다.
+
+  #### Numbrix
