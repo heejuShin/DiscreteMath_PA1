@@ -100,8 +100,8 @@ int main(int argc, char **argv)
                 else
                     fprintf(formula,"(assert (and (<= a%d%d 9) (<= 1 a%d%d)))\n", y, x, y, x) ;
             }
-        }//for
-    }//for
+        }//for_x
+    }//for_y
 
     for(y=1; y <=9; y++){
         for(x=1; x<=9; x++){
