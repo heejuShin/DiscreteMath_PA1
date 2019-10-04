@@ -43,11 +43,11 @@
     ```
         make FillaPix
 
-        gcc FillaPix.c -o Filla Pix
+        gcc FillaPix.c -o FillaPix
 
         ./FillaPix
 
-        input          #<-Enter here
+        input          <-Enter here (filename)
 
     ```
 
