@@ -4,6 +4,7 @@ TARGET2 = FillaPix
 TARGET3 = Numbrix
 
 puzzles : $(TARGET1) $(TARGET2) $(TARGET3)
+	  rm formula*
 
 $(TARGET1) :
 	$(CC) Sudoku.c -o $(TARGET1)
