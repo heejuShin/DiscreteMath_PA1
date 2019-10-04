@@ -8,14 +8,17 @@ puzzles : $(TARGET1) $(TARGET2) $(TARGET3)
 $(TARGET1) :
 	$(CC) Sudoku.c -o $(TARGET1)
 	./$(TARGET1)
+	rm $(TARGET1)
 
 $(TARGET2) : 
 	$(CC) FillaPix.c -o $(TARGET2)
 	./$(TARGET2)
+	rm $(TARGET2)
 
 $(TARGET3) :
 	$(CC) Numbrix.c -o $(TARGET3)
 	./$(TARGET3)
+	rm $(TARGET3)
 
 puzzle :
 		$(CC) Sudoku.c -o $(TARGET1) 
