@@ -102,6 +102,16 @@ int main(int argc, char **argv)
             }
         }
     }
+
+    for(y=1; y <=9; y++){
+        for(x=1; x<=9; x++){
+            fprintf(formula,"(assert ( or ");
+            for(z=1; z<=9; z++)
+                fprintf(formula, "(= a%d%d %d)", y,x,z);
+            fprintf(formula,"))\n");
+        }
+    }
+
     fclose( file );
 //}
 

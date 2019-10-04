@@ -86,8 +86,31 @@ int main(int argc, char **argv)
         for (x = 1 ; x <= M ; x++)
             fprintf(formula,"p%d_%d ", y, x) ;
     fprintf(formula,"))\n");
-    
 
+    for (y = 1 ; y <= N ; y++){
+        fprintf(formula,"(assert (distinct ");
+        for (x = 1 ; x <= M ; x++)
+            fprintf(formula,"p%d_%d ", y, x) ;
+        fprintf(formula,"))\n");
+    }
+
+    for (x = 1 ; x <= M ; x++){
+        fprintf(formula,"(assert (distinct ");
+        for (y = 1 ; y <= M ; y++)
+            fprintf(formula,"p%d_%d ", y, x) ;
+        fprintf(formula,"))\n");
+    }
+
+
+    
+    for(y=1; y <=N; y++){
+        for(x=1; x<=M; x++){
+            fprintf(formula,"(assert ( or ");
+            for(int z=1; z<=(N*M); z++)
+                fprintf(formula, "(= p%d_%d %d)", y,x,z);
+            fprintf(formula,"))\n");
+        }
+    }
 
     for (int y =1; y<=N; y++){
         for (int x=1; x<M+1; x++){
