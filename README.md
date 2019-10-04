@@ -4,13 +4,13 @@
 
 ## Group 3
 
-> 21300   Lee ki hyun
+> 21300506 Lee ki hyun
 
-> 21800079 김민희
+> 21800079 Kim min hee
 
-> 21800412 Shin heeju 
+> 21800412 Shin hee ju 
 
-> 21800760 최하현
+> 21800760 Choi ha hyeon
 
 <hr>
 
@@ -18,7 +18,7 @@
 
  - Enter ```$ make``` or ```$ make puzzles``` to execute codes.
 
- - Enter ```$ make erase``` to clean all execute files. You must do this before doing new make command.
+ - You don't have to erase executable files. It will be done automatically.
 
  - If you want to run each file, enter the desired file name as shown below.
 
