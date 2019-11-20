@@ -22,7 +22,7 @@
  
  - Example
  
- '''(or a1 (not (or (not (or a2 a3)) a4)))'''
+ ```(or a1 (not (or (not (or a2 a3)) a4)))```
 		
 ------------------------------------------------- 
 **The input must fallow these rules.<br>**
