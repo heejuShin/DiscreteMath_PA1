@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html charset="UTF-8">
+<head>
+<title>DiscreteMath PA2_4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<form action='a.jsp'>
+  <input type="text" id="list" value="">
+  <input type='reset', value="reset">
+</form>
+<br>
+  <button onclick="doDraw(0)">polygon</button>
+  <button onclick="doDraw(1)">Draw</button>
+  <button onclick="doClear()">Clear</button>
+<br><br>
+<canvas id="canvas" width="600" height="500"></canvas>
+
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+context.fillStyle = "black";
+context.strokeStyle = "black";
+context.lineWidth = 1.5;
+
+function drawLine(x1, y1, x2, y2){
+  context.moveTo(x1, y1);
+  context.lineTo(x2, y2);
+}
+
+function getAngle(x1, y1, x2, y2, x3, y3) {
+	var rad1 = Math.atan2(y2 - y1, x2 - x1);
+    var rad2 = Math.atan2(y3 - y2, x3 - x2);
+    var result=(rad2*180)/Math.PI-(rad1*180)/Math.PI
+    document.write((rad2*180)/Math.PI+" "+(rad1*180)/Math.PI+"\n");
+	return result ;
+}
+
+function get_degree(x2,y2,cx,cy,x1,y1){
+
+  var r = Math.atan((y2 - cy) / (x2 - cx)) - Math.atan((y1 - cy) / (x1 - cx));
+  var d = r * 180 / Math.PI;
+
+	if(d<0)
+    	return 180+d;
+    else
+		return d;
+}
+function fourway_check(pointP, Ix1, Ix2, px, py){
+
+  max = pointP.length;
+
+  if(Ix1 == 0)
+    var check1 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix1],pointP[Ix1+1],pointP[max-2],pointP[max-1]);
+  else
+    var check1 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix1],pointP[Ix1+1],pointP[Ix1-2],pointP[Ix1-1]);
+
+  if(Ix1 == max - 2)
+    var check2 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix1],pointP[Ix1+1],pointP[0],pointP[1]);
+  else
+    var check2 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix1],pointP[Ix1+1],pointP[Ix1+2],pointP[Ix1+3]);
+
+  if(Ix2 == 0)
+    var check3 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix2],pointP[Ix2+1],pointP[max-2],pointP[max-1]);
+  else
+    var check3 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix2],pointP[Ix2+1],pointP[Ix2-2],pointP[Ix2-1]);
+
+  if(Ix2 == max - 2)
+    var check4 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix2],pointP[Ix2+1],pointP[0],pointP[1]);
+  else
+    var check4 = cross_check2(pointP[Ix1]+px,pointP[Ix1+1]+py,pointP[Ix2]+px,pointP[Ix2+1]+py,pointP[Ix2],pointP[Ix2+1],pointP[Ix2+2],pointP[Ix2+3]);
+
+  return (check1 || check2 || check3 || check4);
+}
+
+
+function is_outside(pointP, Ix1, Ix2){
+
+  var check1 = fourway_check(pointP, Ix1, Ix2, 2, 0);
+  var check2 = fourway_check(pointP, Ix1, Ix2, -2, 0);
+  var check3 = fourway_check(pointP, Ix1, Ix2, 0, 2);
+  var check4 = fourway_check(pointP, Ix1, Ix2, 0, -2);
+
+  return (check1 && check2 && check3 && check4);
+}
+
+function cross_check(x1,y1,x2,y2,x3,y3,x4,y4){
+    let t1 = (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1);
+    let t2 = (x2-x1)*(y4-y1) - (x4-x1)*(y2-y1);
+    let t3 = (x4-x3)*(y1-y3) - (x1-x3)*(y4-y3);
+    let t4 = (x4-x3)*(y2-y3) - (x2-x3)*(y4-y3);
+    if(Math.max(x1, x2) <= Math.min(x3, x4)) return false;
+    if(Math.min(x1, x2) >= Math.max(x3, x4)) return false;
+    if(Math.max(y1, y2) <= Math.min(y3, y4)) return false;
+    if(Math.min(y1, y2) >= Math.max(y3, y4)) return false;
+    return (t1*t2<0 && t3*t4<0);
+}
+
+function cross_check2(x1,y1,x2,y2,x3,y3,x4,y4){
+    let t1 = (x2-x1)*(y3-y1) - (x3-x1)*(y2-y1);
+    let t2 = (x2-x1)*(y4-y1) - (x4-x1)*(y2-y1);
+    let t3 = (x4-x3)*(y1-y3) - (x1-x3)*(y4-y3);
+    let t4 = (x4-x3)*(y2-y3) - (x2-x3)*(y4-y3);
+    if(Math.max(x1, x2) < Math.min(x3, x4)) return false;
+    if(Math.min(x1, x2) > Math.max(x3, x4)) return false;
+    if(Math.max(y1, y2) < Math.min(y3, y4)) return false;
+    if(Math.min(y1, y2) > Math.max(y3, y4)) return false;
+    if(t1==0 && t2==0 && t3==0 && t4==0) return true;
+    return (t1*t2<=0 && t3*t4<=0);
+}
+
+
+
+
+
+function doDraw(type){
+  var list=document.getElementById("list").value;
+  var poly_el = list.split('(').join(',').split(')').join(',').split(',');
+  var pointP = new Array();
+  var count=0;
+  for ( var i in poly_el ) {
+    if(!isNaN(parseInt(poly_el[i]))){
+    	pointP[count]= parseInt(poly_el[i]);
+        count++;
+    }//if
+  }//for
+  
+  //입력받은 점을 pointP에 저장
+  if(check(pointP)==-1){
+  	context.font='italic 40px Calibri';
+ 	  context.fillText("It is not a simple polygon", 5,80);
+    return 0;
+  }
+  if(check(pointP)==-2){
+  	context.font='italic 40px Calibri';
+ 	  context.fillText("Do not enter identical points.", 5,80);
+    return 0;
+  }
+  if(check(pointP)==-3){
+  	context.font='italic 40px Calibri';
+ 	  context.fillText("It is not a polygon", 5,80);
+    return 0;
+  }
+  
+  context.beginPath();
+  for(var i in pointP){
+  	//draw polygon
+  	if(i%2==0){
+    	n=parseInt(i);
+    	if((n+2)>(pointP.length)-1)
+        	drawLine(pointP[n], pointP[n+1], pointP[0], pointP[1]);
+    	drawLine(pointP[n], pointP[n+1], pointP[n+2], pointP[n+3]);
+    }
+  }//for
+  if(type==1)
+  	recursion(pointP, pointP.length, 0, pointP.length/2);
+  if(type==2)
+ 	recursion2(pointP, pointP.length, 0, pointP.length/2);
+    context.closePath();
+  	context.stroke();
+}//doDraw
+
+function min(n1, n2){
+if(n1>n2)
+	return n2;
+else
+	return n1;
+}
+
+
+var deg=0; //각도 합을 확인하기 위한 변수
+var save = new Array();
+var sc = 0; //save count
+
+function recursion(pointP, len, num, count){
+	s_num=num
+    for(var i=4; i<min(8,pointP.length-1); i+=2){//pointP.length //현재 칠각형이상이면 렉걸림
+    //document.write(min(8,pointP.length-1));
+      num=s_num
+      buf=num
+      if(count!=0){	
+      if((buf+i)>(pointP.length)-1)
+          buf-=(pointP.length)
+      if((num)>(pointP.length)-1)
+          num-=(pointP.length)
+          buf2=num
+      if((buf2+2)>(pointP.length)-1)
+          buf2-=(pointP.length)
+      
+      var isOverlap = false;
+      var isout = true;
+      isout=false;
+      isout=is_outside(pointP,num,buf+i);
+      
+      
+      for(var j=0; j<pointP.length; j+=2){
+      	var j2=j;
+      	if((j2+2)>(pointP.length-1))
+        	j2=0;
+      	if(cross_check(pointP[j], pointP[j+1], pointP[j2+2], pointP[j2+3], pointP[num], pointP[num+1], pointP[buf+i], pointP[buf+i+1]))
+        	isout=false;
+      }
+      
+      for(var j=0; j<save.length; j+=4){
+      	if(cross_check(save[j], save[j+1], save[j+2], save[j+3], pointP[num], pointP[num+1], pointP[buf+i], pointP[buf+i+1])){
+        	isOverlap=true;
+            }
+      }
+      //document.write(isOverlap," ", isout, " ");
+      if(isOverlap!=true  && isout==true){
+      	drawLine(pointP[num], pointP[num+1], pointP[buf+i], pointP[buf+i+1]);
+        save[sc++]=pointP[num];
+        save[sc++]=pointP[num+1];
+        save[sc++]=pointP[buf+i];
+        save[sc++]=pointP[buf+i+1];
+       }
+       recursion(pointP, len, num+2, count-1);//2칸씩
+       
+       //추가해야 될 것!!! -> n각형이면 n-3만큼 선이 그러져야한다.
+       
+      //drawLine(pointP[num], pointP[num+1], pointP[buf+i], pointP[buf+i+1]);
+      //recursion(pointP, len, num+2, count-1);//2칸씩
+       
+      }//if count!=0
+    }//for
+}//recursion
+
+
+function doClear() {
+  context.clearRect(0, 0, canvas.width, canvas.height) ;
+  deg=0; //각도 합을 확인하기 위한 변수
+  save = new Array();
+  sc = 0; //save count
+}
+
+function check(p){
+  if(p.length<5)
+    return -3;
+
+
+  for (var i=0; i<p.length; i+=2){
+  	for(var j=i+2; j<p.length; j+=2){
+  		n1=i;
+        n2=j;
+		if ((i+2)>(p.length)-1) n1=0;
+        if ((j+2)>(p.length)-1) n2=0;
+        if(cross_check(p[i],p[i+1],p[n1+2],p[n1+3],p[j],p[j+1],p[n2+2],p[n2+3])==true)
+        	return -1;
+     }
+  }
+  for (var i=0; i<p.length; i+=2){
+  	for(var j=i+2; j<p.length; j+=2){
+        if(p[i]==p[j]&&p[i+1]==p[j+1]&&i!=j)
+          return -2;
+    }
+  }
+  return 0;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<body>
+  <h3>DiscreteMath PA2_1 team12</h3>
+  <p>Input format : 1 ~ 13 integer</p>
+  <p></p>
+  <p>Draw button draws the fractal on the canvas.</p>
+  <p>Clear button clears the canvas.</p>
+<input type="text" id="depth" value="">
+<button onclick="doDraw()">Draw</button>
+<button onclick="doClear()">Clear</button>
+<br>
+<canvas id="canvas" width="600" height="500"></canvas>
+
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+context.lineWidth = 1;
+context.strokeStyle = 'blue';
+
+function drawLine(x1, y1, x2, y2){
+  context.moveTo(x1, y1);
+  context.lineTo(x2, y2);
+}
+
+function drawCross(x1, y1, depth,length,direction){
+  if (depth !== 0){
+    var next_length = length / 2;
+    if(direction != 2){
+      drawLine(x1 + length, y1, x1, y1);
+      drawCross(x1+length, y1, depth - 1, next_length,0);
+    }
+    if(direction != 3){
+      drawLine(x1, y1-length, x1, y1);
+      drawCross(x1, y1-length, depth - 1, next_length,1);
+    }
+    if(direction != 0){
+      drawLine(x1 - length, y1, x1, y1);
+      drawCross(x1-length, y1, depth - 1, next_length,2);
+    }
+    if(direction != 1){
+      drawLine(x1, y1 + length, x1, y1);
+      drawCross(x1, y1+length, depth - 1, next_length,3);
+    }
+  }
+}
+
+function doDraw(){
+  var depth = parseInt(document.getElementById("depth").value) ;
+  context.beginPath();
+  drawCross(300, 250, depth,100,4);
+  context.closePath();
+  context.stroke();
+}
+function doClear() {
+  context.clearRect(0, 0, canvas.width, canvas.height) ;
+}
+</script>
+
+</body>
+</html>
